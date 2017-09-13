@@ -8,12 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		8298AF021F6776C500E6355A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8298AF011F6776C500E6355A /* AppDelegate.swift */; };
-		8298AF041F6776C500E6355A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8298AF031F6776C500E6355A /* ViewController.swift */; };
 		8298AF071F6776C500E6355A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8298AF051F6776C500E6355A /* Main.storyboard */; };
 		8298AF091F6776C500E6355A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8298AF081F6776C500E6355A /* Assets.xcassets */; };
 		8298AF0C1F6776C500E6355A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8298AF0A1F6776C500E6355A /* LaunchScreen.storyboard */; };
 		8298AF171F6776C500E6355A /* MovieDemoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8298AF161F6776C500E6355A /* MovieDemoTests.swift */; };
 		8298AF221F6776C500E6355A /* MovieDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8298AF211F6776C500E6355A /* MovieDemoUITests.swift */; };
+		82D54E141F68F754000D9A8D /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D54E131F68F754000D9A8D /* Movie.swift */; };
+		82D54E181F69000B000D9A8D /* MovieService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D54E171F69000B000D9A8D /* MovieService.swift */; };
+		82D54E1B1F690165000D9A8D /* MoviesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82D54E1A1F690165000D9A8D /* MoviesViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +38,6 @@
 /* Begin PBXFileReference section */
 		8298AEFE1F6776C500E6355A /* MovieDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8298AF011F6776C500E6355A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8298AF031F6776C500E6355A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8298AF061F6776C500E6355A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8298AF081F6776C500E6355A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8298AF0B1F6776C500E6355A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +48,9 @@
 		8298AF1D1F6776C500E6355A /* MovieDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8298AF211F6776C500E6355A /* MovieDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDemoUITests.swift; sourceTree = "<group>"; };
 		8298AF231F6776C500E6355A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		82D54E131F68F754000D9A8D /* Movie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		82D54E171F69000B000D9A8D /* MovieService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieService.swift; sourceTree = "<group>"; };
+		82D54E1A1F690165000D9A8D /* MoviesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,12 +101,14 @@
 		8298AF001F6776C500E6355A /* MovieDemo */ = {
 			isa = PBXGroup;
 			children = (
+				82D54E161F68FDC2000D9A8D /* Models */,
 				8298AF011F6776C500E6355A /* AppDelegate.swift */,
-				8298AF031F6776C500E6355A /* ViewController.swift */,
 				8298AF051F6776C500E6355A /* Main.storyboard */,
 				8298AF081F6776C500E6355A /* Assets.xcassets */,
 				8298AF0A1F6776C500E6355A /* LaunchScreen.storyboard */,
 				8298AF0D1F6776C500E6355A /* Info.plist */,
+				82D54E191F690021000D9A8D /* Services */,
+				82D54E1C1F69016B000D9A8D /* ViewController */,
 			);
 			path = MovieDemo;
 			sourceTree = "<group>";
@@ -123,6 +129,30 @@
 				8298AF231F6776C500E6355A /* Info.plist */,
 			);
 			path = MovieDemoUITests;
+			sourceTree = "<group>";
+		};
+		82D54E161F68FDC2000D9A8D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				82D54E131F68F754000D9A8D /* Movie.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		82D54E191F690021000D9A8D /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				82D54E171F69000B000D9A8D /* MovieService.swift */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
+		82D54E1C1F69016B000D9A8D /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				82D54E1A1F690165000D9A8D /* MoviesViewController.swift */,
+			);
+			name = ViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,8 +289,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8298AF041F6776C500E6355A /* ViewController.swift in Sources */,
 				8298AF021F6776C500E6355A /* AppDelegate.swift in Sources */,
+				82D54E181F69000B000D9A8D /* MovieService.swift in Sources */,
+				82D54E141F68F754000D9A8D /* Movie.swift in Sources */,
+				82D54E1B1F690165000D9A8D /* MoviesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -505,6 +537,7 @@
 				8298AF281F6776C500E6355A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8298AF291F6776C500E6355A /* Build configuration list for PBXNativeTarget "MovieDemoTests" */ = {
 			isa = XCConfigurationList;
@@ -513,6 +546,7 @@
 				8298AF2B1F6776C500E6355A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8298AF2C1F6776C500E6355A /* Build configuration list for PBXNativeTarget "MovieDemoUITests" */ = {
 			isa = XCConfigurationList;
@@ -521,6 +555,7 @@
 				8298AF2E1F6776C500E6355A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
