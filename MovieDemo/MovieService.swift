@@ -8,6 +8,7 @@
 
 import Foundation
 
+private let imageBaseUrl:String = "https://image.tmdb.org/t/p/w342"
 private let baseUrl:String = "https://api.themoviedb.org/3/movie/"
 private let apiKey:String = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
 
@@ -22,11 +23,16 @@ class MovieService {
                 errorCallBack?(error)
             } else if let data = data,
                 let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as? NSDictionary {
-                //print(dataDictionary)
                 successCallBack(dataDictionary)
             }
         }
         task.resume()
+    }
+    
+    class func getImageUrl(path: String) -> URL {
+        let fullUrl = "\(imageBaseUrl)\(path)"
+        return URL(string: fullUrl)!
+        
     }
     
 }
