@@ -7,6 +7,9 @@ target 'MovieDemo' do
 
   # Pods for MovieDemo
   pod ‘AFNetworking’, ‘~>3.0’
+  
+  # Pod for progress
+  pod 'MBProgressHUD'
   target 'MovieDemoTests' do
     inherit! :search_paths
     # Pods for testing

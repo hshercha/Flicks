@@ -5,7 +5,8 @@
 //  Created by hsherchan on 9/12/17.
 //  Copyright © 2017 Hearsay. All rights reserved.
 //
-
+import UIKit
+import MBProgressHUD
 import Foundation
 
 private let imageBaseUrl:String = "https://image.tmdb.org/t/p/w342"
@@ -14,11 +15,13 @@ private let apiKey:String = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
 
 class MovieService {
     
-    class func fetchNowPlaying(successCallBack: @escaping (NSDictionary) -> (), errorCallBack: ((Error?) -> ())?) {
-        let url = URL(string: "\(baseUrl)now_playing?api_key=\(apiKey)")!
+    class func fetch(addLoading: UIView, endPoint: String, successCallBack: @escaping (NSDictionary) -> (), errorCallBack: ((Error?) -> ())?) {
+        let url = URL(string: "\(baseUrl)\(endPoint)?api_key=\(apiKey)")!
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
         let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
+        MBProgressHUD.showAdded(to: addLoading, animated: true)
         let task: URLSessionDataTask = session.dataTask(with: request) { (data: Data?, response: URLResponse?, error: Error?) in
+            MBProgressHUD.hide(for: addLoading, animated: true)
             if let error = error {
                 errorCallBack?(error)
             } else if let data = data,

@@ -39,5 +39,6 @@ class Movie {
         self.hasMatureContent = fromDict["adult"] as? Bool
         self.overview = fromDict["overview"] as? String
         self.releaseDate = fromDict["release_date"] as? String
+        self.voteAverage = fromDict["vote_average"] as? Double
     }
 }
