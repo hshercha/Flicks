@@ -8,10 +8,13 @@
 
 import UIKit
 import AFNetworking
+import MBProgressHUD
 
-class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate {
+class MoviesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate,
+    UISearchBarDelegate{
 
     var movies:[Movie] = []
+    var filteredMovies:[Movie] = []
     var endpoint:String = ""
     @IBOutlet weak var tableView: UITableView!
     
@@ -19,6 +22,9 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var networkErrorView: UIView!
     
     @IBOutlet weak var layoutBarBtn: UIBarButtonItem!
+
+    @IBOutlet weak var searchBar: UISearchBar!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.networkErrorView.isHidden = true
@@ -27,6 +33,8 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
+        
+        self.searchBar.delegate = self
         self.loadNowPlaying(refreshControl: nil)
         
         let refreshControl = UIRefreshControl()
@@ -44,8 +52,6 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         self.view.addSubview(self.collectionView)
         self.view.addSubview(self.tableView)
         
-        
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -55,12 +61,12 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.movies.count
+        return self.filteredMovies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieViewCell
-        let movie = self.movies[indexPath.row]
+        let movie = self.filteredMovies[indexPath.row]
         let movieUrl = MovieService.getImageUrl(path: movie.posterPath!)
         cell.titleLabel!.text = movie.title!.uppercased()
         cell.descriptionLabel!.text = movie.overview!
@@ -76,12 +82,12 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.movies.count
+        return self.filteredMovies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCollectionCell", for: indexPath) as! MovieCollectionViewCell
-        let movie = self.movies[indexPath.row]
+        let movie = self.filteredMovies[indexPath.item]
         let movieUrl = MovieService.getImageUrl(path: movie.posterPath!)
         cell.posterImageView.setImageWith(movieUrl)
         
@@ -91,15 +97,26 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
     
     func loadNowPlaying(refreshControl: UIRefreshControl?) {
-        MovieService.fetch(addLoading: self.view, endPoint: self.endpoint, successCallBack: { (data) in
+        weak var weakAddLoading:UIView!
+        
+        if (isLayoutTableView()) {
+            print ("here")
+            weakAddLoading = self.tableView
+        } else {
+            weakAddLoading = self.collectionView
+        }
+        MBProgressHUD.showAdded(to: weakAddLoading!, animated: true)
+        MovieService.fetch(endPoint: self.endpoint, successCallBack: { (data) in
             let results = data["results"] as! [NSDictionary]
             self.movies = results.map { (movie) -> Movie in
                 return Movie(fromDict: movie)
             }
+            self.filteredMovies = self.movies
             self.tableView.reloadData()
             self.collectionView.reloadData()
             self.networkErrorView.isHidden = true
             
+            MBProgressHUD.hide(for: weakAddLoading!, animated: true)
             if let refresh = refreshControl as UIRefreshControl? {
                 refresh.endRefreshing()
             }
@@ -109,6 +126,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
             if let refresh = refreshControl as UIRefreshControl? {
                 refresh.endRefreshing()
             }
+            MBProgressHUD.hide(for: weakAddLoading!, animated: true)
         }
         
     }
@@ -119,11 +137,11 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         if segue.identifier == "tableCell" {
             let cell = sender as! MovieViewCell
             let indexPath = tableView.indexPath(for: cell)
-            movie = movies[indexPath!.row]
+            movie = filteredMovies[indexPath!.row]
         } else if segue.identifier == "collectionCell" {
             let cell = sender as! MovieCollectionViewCell
             let indexPath = collectionView.indexPath(for: cell)
-            movie = movies[indexPath!.row]
+            movie = filteredMovies[indexPath!.item]
         }
         
         
@@ -155,9 +173,41 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         }
         
         
+    }
+    
+    func isLayoutTableView() ->Bool {
+        let listViewIndex = self.view.subviews.index(of: self.tableView)!
+        let collectionViewIndex = self.view.subviews.index(of: self.collectionView)!
+        
+        if (listViewIndex < collectionViewIndex) {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        self.searchBar.showsCancelButton = true
         
     }
-
     
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
 
+
+        self.filteredMovies = self.movies
+        tableView.reloadData()
+        collectionView.reloadData()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filteredMovies = searchText.isEmpty ? movies : movies.filter { (movie: Movie) -> Bool in
+            return movie.origTitle!.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+        }
+        
+        tableView.reloadData()
+        collectionView.reloadData()
+    }
 }
