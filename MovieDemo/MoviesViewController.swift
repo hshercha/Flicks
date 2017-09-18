@@ -32,7 +32,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
         self.tableView.insertSubview(refreshControl, at:0)
-        self.collectionView.insertSubview(refreshControl, at:0)
+        
         
         let logo = UIImage(named: "flixnet.png")
         let imageView = UIImageView(image:logo)
@@ -139,13 +139,21 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         let listViewIndex = self.view.subviews.index(of: self.tableView)!
         let collectionViewIndex = self.view.subviews.index(of: self.collectionView)!
         
+        
+        self.view.exchangeSubview(at: listViewIndex, withSubviewAt: collectionViewIndex)
         if (listViewIndex < collectionViewIndex ) {
+            let refreshControl = UIRefreshControl()
+            refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
             self.layoutBarBtn.image = UIImage(named:"grid.png")
+            self.tableView.insertSubview(refreshControl, at:0)
             
         } else {
+            let refreshControl = UIRefreshControl()
+            refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
             self.layoutBarBtn.image = UIImage(named:"list.png")
+            self.collectionView.insertSubview(refreshControl, at:0)
         }
-        self.view.exchangeSubview(at: listViewIndex, withSubviewAt: collectionViewIndex)
+        
         
         
     }
