@@ -31,7 +31,7 @@ class Movie {
         self.hasVideo = fromDict["video"] as? Bool
         self.title = fromDict["title"] as? String
         self.popularity = fromDict["popularity"] as? Double
-        self.posterPath = fromDict["poster_path"] as? String
+        self.posterPath = fromDict["poster_paths"] as? String ?? ""
         self.origLang = fromDict["original_language"] as? String
         self.origTitle = fromDict["original_title"] as? String
         self.genreIds = fromDict["genre_ids"] as? [Double]

@@ -11,6 +11,8 @@ import UIKit
 class MovieDetailsViewController: UIViewController {
     
     var movie: Movie!
+    var myval: Movie!
+    
     @IBOutlet weak var posterImageView: UIImageView!
 
     @IBOutlet weak var infoView: UIView!
@@ -23,20 +25,21 @@ class MovieDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupScroll()
-        let movieUrl = MovieService.getImageUrl(path: movie.posterPath!)
-        titleLabel!.text = movie.title!.uppercased()
-        descriptionLabel!.text = movie.overview!
-        releaseDateLabel!.text = "Release Date: \(movie.releaseDate!)"
-        
-        if let voteAverage = movie.voteAverage as Double? {
-            ratingsLabel!.text = "Ratings: \(voteAverage * 10)%"
-        } else {
-            ratingsLabel!.text = ""
+        if let movie = movie {
+            let movieUrl = MovieService.getImageUrl(path: movie.posterPath!)
+            titleLabel!.text = movie.title!.uppercased()
+            descriptionLabel!.text = movie.overview!
+            releaseDateLabel!.text = "Release Date: \(movie.releaseDate!)"
+            
+            if let voteAverage = movie.voteAverage as Double? {
+                ratingsLabel!.text = "Ratings: \(voteAverage * 10)%"
+            } else {
+                ratingsLabel!.text = ""
+            }
+            
+            descriptionLabel!.sizeToFit()
+            posterImageView.setImageWith(movieUrl)
         }
-        
-        descriptionLabel!.sizeToFit()
-        posterImageView.setImageWith(movieUrl)
-
         // Do any additional setup after loading the view.
     }
 

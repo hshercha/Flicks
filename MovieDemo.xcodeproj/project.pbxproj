@@ -234,7 +234,6 @@
 				8298AEFB1F6776C500E6355A /* Frameworks */,
 				8298AEFC1F6776C500E6355A /* Resources */,
 				68D15265399A8753DF8EC2BB /* [CP] Embed Pods Frameworks */,
-				859373A6890F135304F8E594 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -253,8 +252,6 @@
 				8298AF0E1F6776C500E6355A /* Sources */,
 				8298AF0F1F6776C500E6355A /* Frameworks */,
 				8298AF101F6776C500E6355A /* Resources */,
-				2290B549E79CF79C4C75017D /* [CP] Embed Pods Frameworks */,
-				AE5CEE20E47B07B1B150035D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -274,8 +271,6 @@
 				8298AF191F6776C500E6355A /* Sources */,
 				8298AF1A1F6776C500E6355A /* Frameworks */,
 				8298AF1B1F6776C500E6355A /* Resources */,
-				145D13E8597E6078BC6DC354 /* [CP] Embed Pods Frameworks */,
-				00EBB788F83E0DE9E505AE9B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -367,51 +362,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		00EBB788F83E0DE9E505AE9B /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MovieDemoUITests/Pods-MovieDemoUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		145D13E8597E6078BC6DC354 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MovieDemoUITests/Pods-MovieDemoUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2290B549E79CF79C4C75017D /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MovieDemoTests/Pods-MovieDemoTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		68D15265399A8753DF8EC2BB /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -430,21 +380,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MovieDemo/Pods-MovieDemo-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		859373A6890F135304F8E594 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MovieDemo/Pods-MovieDemo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A8483897B0FCFF05F22E73DF /* [CP] Check Pods Manifest.lock */ = {
@@ -481,21 +416,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		AE5CEE20E47B07B1B150035D /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MovieDemoTests/Pods-MovieDemoTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D79701D1C8927428BDEE6AAC /* [CP] Check Pods Manifest.lock */ = {

@@ -39,8 +39,6 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshControlAction(_:)), for: UIControlEvents.valueChanged)
-        self.tableView.insertSubview(refreshControl, at:0)
-        
         
         let logo = UIImage(named: "flixnet.png")
         let imageView = UIImageView(image:logo)
@@ -82,7 +80,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.filteredMovies.count
+        return self.movies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -145,7 +143,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
         }
         
         
-        vc.movie = movie
+        vc.myval = movie
     }
     
     func refreshControlAction(_ refreshControl: UIRefreshControl) {
@@ -204,7 +202,7 @@ class MoviesViewController: UIViewController, UITableViewDataSource, UITableView
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         filteredMovies = searchText.isEmpty ? movies : movies.filter { (movie: Movie) -> Bool in
-            return movie.origTitle!.range(of: searchText, options: .caseInsensitive, range: nil, locale: nil) != nil
+            return movie.origTitle!.range(of: "", options: .caseInsensitive, range: nil, locale: nil) != nil
         }
         
         tableView.reloadData()
